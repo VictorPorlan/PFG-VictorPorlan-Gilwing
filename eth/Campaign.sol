@@ -3,12 +3,16 @@
 pragma solidity ^0.8.9;
 
 contract Campaign  {
+    struct Donation {
+        uint amount;
+        string comment;
+    }
+
     struct Donator {
         bool exists;
         string name;
         uint date;
-        uint[] donations;
-        string comment;
+        Donation[] donations;
     }
 
     address public manager;
@@ -16,7 +20,7 @@ contract Campaign  {
     string public title;
     string public description;
     address[] public membersList;
-    mapping(address => Donator) members;
+    mapping(address => Donator) public members;
 
     constructor (uint minimum, string memory titleCont, string memory descriptionCont) {
         manager = msg.sender;
@@ -32,12 +36,10 @@ contract Campaign  {
         Donator storage newDonator = members[msg.sender];
         newDonator.name = nameDonator;
         newDonator.date = block.timestamp;
-        newDonator.donations.push(msg.value);
-        newDonator.comment = commentDonator;
         newDonator.exists = true;
+
+        Donation memory newDonation = Donation({amount: msg.value, comment:commentDonator});
+        newDonator.donations.push(newDonation);
     }
     
-    function donatorData(address donatorAddress) public view returns(Donator memory){
-        return members[donatorAddress];
-    }
 }
