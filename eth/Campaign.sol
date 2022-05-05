@@ -42,4 +42,18 @@ contract Campaign  {
         newDonator.donations.push(newDonation);
     }
     
+    function getDonations (address donator) public view returns(Donation[]memory){
+        return (members[donator].donations);
+    }
+
+    function addDonation(string memory commentDonator) public payable {
+        require(msg.value > minimumContribution);
+        require(members[msg.sender].exists);
+
+        Donator storage donor = members[msg.sender];
+        Donation memory newDonation = Donation({amount: msg.value, comment:commentDonator});
+
+        donor.donations.push(newDonation);
+    }
+
 }
