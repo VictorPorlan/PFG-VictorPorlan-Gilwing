@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.9;
 
-contract CampaignFactory {
+contract Factory {
     Campaign[] public deployedCampaigns;
     
     function createCampaign(uint minimum, string memory titleCont, string memory descriptionCont) public {
@@ -57,6 +57,10 @@ contract Campaign  {
     
     function getDonations (address donator) public view returns(Donation[]memory){
         return (members[donator].donations);
+    }
+
+    function getMemberList () public view returns(address[]memory){
+        return membersList;
     }
 
     function addDonation(string memory commentDonator) public payable {

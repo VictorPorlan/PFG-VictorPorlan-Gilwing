@@ -1,6 +1,6 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const Web3 = require("web3");
-const compiledFactory = require("./build/CampaignFactory.json");
+const compiledFactory = require("./build/Factory.json");
 
 const provider = new HDWalletProvider(
   "atom galaxy want baby strike alarm duck library shaft visual evoke planet",

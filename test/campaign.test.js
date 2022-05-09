@@ -3,7 +3,7 @@ const ganache = require("ganache-cli");
 const Web3 = require("web3");
 const web3 = new Web3(ganache.provider());
 
-const compiledFactory = require("../eth/build/CampaignFactory.json");
+const compiledFactory = require("../eth/build/Factory.json");
 const compiledCampaign = require("../eth/build/Campaign.json");
 
 let accounts;
@@ -74,5 +74,79 @@ describe("Campaigns", () => {
 
   });
 
+  it("require minimum contribution", async () => {
+    let executed;
+    try {
+      await campaign.methods.newDonatorContribution("Víctor", "Disfruta la donación").send({
+        value:"5",
+        from: accounts[1],
+        gas: "2000000"
+      })
+  
+      executed = "succ";
+    } catch (err) {
+      executed = "fail";
+    }
+    assert.equal("fail", executed);
+  });
+
+  it("require create new donatior profile", async () => {
+    let executed;
+    try {
+      await campaign.methods.newDonatorContribution("Víctor", "Disfruta la donación").send({
+        value:"200",
+        from: accounts[1],
+        gas: "2000000"
+      })
+  
+      await campaign.methods.newDonatorContribution("Víctor", "Intento crear segunda donacion").send({
+        value:"200",
+        from: accounts[1],
+        gas: "2000000"
+      })
+
+      executed = "succ";
+    } catch (err) {
+      executed = "fail";
+    }
+    assert.equal("fail", executed);
+  });
+
+  it("require created profile to add", async () => {
+    let executed;
+    try {
+      await campaign.methods.addDonation("Mi primera donación").send({
+        value:"200",
+        from: accounts[1],
+        gas: "2000000"
+      })
+
+      executed = "succ";
+    } catch (err) {
+      executed = "fail";
+    }
+    assert.equal("fail", executed);
+  });
+
+  it("memberList adds addresses", async () => {
+      await campaign.methods.newDonatorContribution("Víctor", "Disfruta la donación").send({
+        value:"200",
+        from: accounts[1],
+        gas: "2000000"
+      })
+      let list = await campaign.methods.getMemberList().call()
+
+      assert(list.length === 1);
+
+      await campaign.methods.newDonatorContribution("Víctor", "Intento crear segunda donacion").send({
+        value:"200",
+        from: accounts[2],
+        gas: "2000000"
+      })
+
+      list = await campaign.methods.getMemberList().call()
+    
+    assert(list.length === 2);
+  });
 
 });
