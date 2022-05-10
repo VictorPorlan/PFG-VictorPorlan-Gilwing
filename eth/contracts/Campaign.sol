@@ -4,7 +4,9 @@ pragma solidity ^0.8.9;
 
 contract Factory {
     Campaign[] public deployedCampaigns;
-    
+    mapping(address => address[]) public donatedTo;
+    mapping(address => address[]) public myCampaigns;
+
     function createCampaign(uint minimum, string memory titleCont, string memory descriptionCont) public {
         Campaign newCampaign = new Campaign(minimum, titleCont, descriptionCont, msg.sender);
         deployedCampaigns.push(newCampaign);
@@ -13,9 +15,27 @@ contract Factory {
     function getDeployedCampaigns() public view returns (Campaign[] memory) {
         return deployedCampaigns;
     }
+
+    function addDonatedTo(address donator, address donatedToFunc) public  {
+        address[] storage addedDonations = donatedTo[donator];
+        addedDonations.push(donatedToFunc);
+        donatedTo[donator] = addedDonations;
+    }
+
+    function addMyCampaigns(address manager, address newCampaign) public  {
+        address[] storage campaigns = myCampaigns[manager];
+        campaigns.push(newCampaign);
+        myCampaigns[manager] = campaigns;
+    }
 }
 
 contract Campaign  {
+    struct Transaction {
+        string description;
+        uint value;
+        address recipient;
+    }
+    
     struct Donation {
         uint amount;
         string comment;
@@ -34,12 +54,21 @@ contract Campaign  {
     string public description;
     address[] public membersList;
     mapping(address => Donator) public members;
+    Transaction[] public transactions;
 
     constructor (uint minimum, string memory titleCont, string memory descriptionCont, address managerCont) {
         manager = managerCont;
         minimumContribution = minimum;
         title = titleCont;
         description = descriptionCont;
+    }
+    
+    function getDonations (address donator) public view returns(Donation[]memory){
+        return (members[donator].donations);
+    }
+
+    function getMemberList () public view returns(address[]memory){
+        return membersList;
     }
 
     function newDonatorContribution(string memory nameDonator, string memory commentDonator) public payable {
@@ -54,14 +83,6 @@ contract Campaign  {
         Donation memory newDonation = Donation({amount: msg.value, comment:commentDonator});
         newDonator.donations.push(newDonation);
     }
-    
-    function getDonations (address donator) public view returns(Donation[]memory){
-        return (members[donator].donations);
-    }
-
-    function getMemberList () public view returns(address[]memory){
-        return membersList;
-    }
 
     function addDonation(string memory commentDonator) public payable {
         require(msg.value > minimumContribution);
@@ -73,4 +94,15 @@ contract Campaign  {
         donor.donations.push(newDonation);
     }
 
+    function makeTransaction (string memory descriptionTransact, uint amountTransact, address recipientTransact)public{
+        require(msg.sender == manager);
+        Transaction memory newTransaction = Transaction({
+            description: descriptionTransact,
+            value: amountTransact,
+            recipient: recipientTransact
+        });
+
+        payable(recipientTransact).transfer(amountTransact);
+        transactions.push(newTransaction);
+    }
 }
