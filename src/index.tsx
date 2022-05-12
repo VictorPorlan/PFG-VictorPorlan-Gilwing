@@ -1,15 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./index.css";
+import LandingPage from "./pages/landingPage";
+import reportWebVitals from "./reportWebVitals";
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={darkTheme}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />}>
+
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
