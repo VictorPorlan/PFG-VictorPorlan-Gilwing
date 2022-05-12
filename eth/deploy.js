@@ -1,6 +1,12 @@
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const Web3 = require("web3");
 const compiledFactory = require("./build/Factory.json");
+const path = require("path");
+const fs = require("fs-extra");
+
+const buildPath = path.resolve(__dirname, "build");
+
+fs.ensureDirSync(buildPath);
 
 const provider = new HDWalletProvider(
   "atom galaxy want baby strike alarm duck library shaft visual evoke planet",
@@ -14,8 +20,14 @@ const deploy = async () => {
 
   const result = await new web3.eth.Contract(compiledFactory.abi)
     .deploy({ data: compiledFactory.evm.bytecode.object })
-    .send({ gas: "2000000", from: accounts[0] });
+    .send({ gas: "5000000", from: accounts[0] });
 
-  console.log("Contract deployed to", result.options.address);
-};
+    fs.writeFileSync(
+      path.resolve(buildPath, `FactoryAddress.json`),
+      JSON.stringify({factory: result.options.address}, null, 2),
+      "utf8"
+    );
+    console.log("Contract deployed at", accounts[0]);
+
+  };
 deploy();
