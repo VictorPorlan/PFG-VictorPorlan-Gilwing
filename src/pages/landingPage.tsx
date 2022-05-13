@@ -3,6 +3,7 @@ import MainTemplate from "../components/templates/mainTemplate"
 
 const LandingPage: FC = () => {
     return( 
+        
         <MainTemplate />
     )
 }
