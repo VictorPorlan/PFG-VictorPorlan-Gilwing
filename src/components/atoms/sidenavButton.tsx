@@ -11,13 +11,11 @@ interface IProps {
 
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: "#31313C",
     width: 100,
     height: 100,
     display: "flex",
     flexDirection: "column",
     justifyItems: "start",
-    borderRadius: "20%",
   },
   
 }));

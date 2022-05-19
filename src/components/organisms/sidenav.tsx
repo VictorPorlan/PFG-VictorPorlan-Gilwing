@@ -6,7 +6,7 @@ import {
   import SidenavButton from "../atoms/sidenavButton";
   import Wallet from '@mui/icons-material/AccountBalanceWallet';
   import SavingsIcon from '@mui/icons-material/Savings';
-  import QuestionMark from '@mui/icons-material/QuestionMark';
+  import Plus from '@mui/icons-material/Add';
 
   const useStyles = makeStyles(() => ({
     root: {
@@ -36,8 +36,8 @@ import {
             <SidenavButton text={"Proyectos"} url="/proyectos">
               <SavingsIcon fontSize="large" sx={{color: "#ba87fa"}}></SavingsIcon>
             </SidenavButton>
-            <SidenavButton text={"Ayuda"} url="/ayuda">
-              <QuestionMark fontSize="large" sx={{color: "#ba87fa"}}></QuestionMark>
+            <SidenavButton text={"crear"} url="/crear">
+              <Plus fontSize="large" sx={{color: "#ba87fa"}}></Plus>
             </SidenavButton>
         </div>
       </>

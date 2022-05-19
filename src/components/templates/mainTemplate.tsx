@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
   
 }));
 
-const MainTemplate: FC = (props: any) => {
+const MainTemplate: FC<any> = ({children}) => {
   const classes = useStyles()
   
   return (
@@ -30,7 +30,7 @@ const MainTemplate: FC = (props: any) => {
     <div className={classes.root}>
       <Sidenav />
         <div className={classes.content}>
-          <MainHeader></MainHeader>
+          {children}
         </div>
       </div>
     </>

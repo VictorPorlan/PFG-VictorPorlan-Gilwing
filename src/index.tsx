@@ -6,6 +6,7 @@ import LandingPage from "./pages/landingPage";
 import reportWebVitals from "./reportWebVitals";
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CreateCampaign from "./pages/createCampaign";
 
 const darkTheme = createTheme({
   palette: {
@@ -23,9 +24,8 @@ root.render(
     <ThemeProvider theme={darkTheme}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />}>
-
-        </Route>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/crear" element={<CreateCampaign />} />
       </Routes>
     </BrowserRouter>
     </ThemeProvider>
