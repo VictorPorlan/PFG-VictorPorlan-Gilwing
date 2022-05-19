@@ -33,9 +33,10 @@ interface IProps {
     handleTitulo: (titulo:string) => void;
     handleDescripcion: (descripcion:string) => void;
     handleMinimo: (minimo:number) => void;
+    handleCreate: () => void;
 }
 
-const CrearTemplate: FC<IProps> = ({titulo, descripcion, minimo, handleTitulo, handleDescripcion, handleMinimo}) => {
+const CrearTemplate: FC<IProps> = ({titulo, descripcion, minimo, handleTitulo, handleDescripcion, handleMinimo,handleCreate}) => {
   const classes = useStyles();
   return (
     <>
@@ -90,6 +91,7 @@ const CrearTemplate: FC<IProps> = ({titulo, descripcion, minimo, handleTitulo, h
                 marginRight: 30,
                 marginBottom: 10,
               }}
+              onClick={handleCreate}
             >
               Crear
             </Button>

@@ -1,6 +1,8 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import { Card } from "@mui/material";
 import { FC } from "react";
+import image from "../../assets/Gilwing1.png"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.down('md')]: {
@@ -63,7 +65,7 @@ const MainHeader: FC = () => {
           }}
         >
           <img
-            src={require("../../assets/Gilwing1.png")}
+            src={image}
             alt="logo"
             style={{ justifySelf: "center" }}
           ></img>
