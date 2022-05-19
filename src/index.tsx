@@ -11,6 +11,9 @@ import CreateCampaign from "./pages/createCampaign";
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary:{
+      main: "#ba87fa"
+    }
   },
 });
 

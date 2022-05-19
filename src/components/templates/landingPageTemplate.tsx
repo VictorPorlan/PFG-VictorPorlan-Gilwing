@@ -6,18 +6,10 @@ import {
 import MainTemplate from "./mainTemplate";
   
   const useStyles = makeStyles(() => ({
-    root:{
-      display:"flex",
-      flexDirection:"row",
-      height:"100vh"
-    },
     content: {
       width:'100%',
-      backgroundColor:"#31313C",
-      marginLeft:100,
       display:"grid",
       gridTemplateRows:"500px 1fr"
-  
     },
     
   }));
@@ -28,7 +20,9 @@ import MainTemplate from "./mainTemplate";
     return (
       <>
       <MainTemplate >
+        <div className={classes.content}>
             <MainHeader></MainHeader>
+        </div>
         </MainTemplate>
       </>
     );

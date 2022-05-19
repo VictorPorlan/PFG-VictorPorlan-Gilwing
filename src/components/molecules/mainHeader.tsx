@@ -11,8 +11,6 @@ const useStyles = makeStyles((theme) => ({
         'cards'
         'cards'
         `,
-    
-      
     },
     height: "95%",
     width: "95%",

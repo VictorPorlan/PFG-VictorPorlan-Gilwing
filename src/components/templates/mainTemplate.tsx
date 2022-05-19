@@ -2,7 +2,6 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { FC } from "react";
-import MainHeader from "../molecules/mainHeader";
 import Sidenav from "../organisms/sidenav";
 
 const useStyles = makeStyles(() => ({
@@ -15,9 +14,6 @@ const useStyles = makeStyles(() => ({
     width:'100%',
     backgroundColor:"#31313C",
     marginLeft:100,
-    display:"grid",
-    gridTemplateRows:"500px 1fr"
-
   },
   
 }));
