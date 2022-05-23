@@ -27,7 +27,7 @@ const deploy = async () => {
       JSON.stringify({factory: result.options.address}, null, 2),
       "utf8"
     );
-    console.log("Contract deployed at", accounts[0]);
+    console.log("Contract deployed at", result.options.address);
 
   };
 deploy();

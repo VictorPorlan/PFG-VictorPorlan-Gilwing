@@ -7,9 +7,12 @@ contract Factory {
     mapping(address => address[]) public donatedTo;
     mapping(address => address[]) public myCampaigns;
 
+    event DeployedAt(Campaign loc);
+
     function createCampaign(uint minimum, string memory titleCont, string memory descriptionCont) public {
         Campaign newCampaign = new Campaign(minimum, titleCont, descriptionCont, msg.sender);
         deployedCampaigns.push(newCampaign);
+        emit DeployedAt(newCampaign);
     }
 
     function getDeployedCampaigns() public view returns (Campaign[] memory) {
