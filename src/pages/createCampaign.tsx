@@ -18,7 +18,7 @@ const CreateCampaign: FC = () => {
     const [address, setAddress] = useState("")
 
     const handleOnPressDialog = () => {
-      navigate(`/campaign/${address}`)
+      navigate(`/campaigns/${address}`)
     };
 
     const handleCreate = async () => {
@@ -27,7 +27,10 @@ const CreateCampaign: FC = () => {
         const response = await factory.methods
             .createCampaign(minimo, titulo, descripcion)
             .send({ from: accounts[0] });
+
         setAddress(response.events.DeployedAt.returnValues.loc)
+
+
         setFinished(true)
         setMessage("Se ha creado la campaña con éxito")
     };

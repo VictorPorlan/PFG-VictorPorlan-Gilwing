@@ -62,7 +62,7 @@ const CrearTemplate: FC<IProps> = ({
                     <div className={classes.text}>
                         <Typography
                             variant="h3"
-                            style={{ color: "#ba87fa", fontFamily: "Oswald" }}
+                            style={{ color: "#ba87fa", fontFamily: "Oswald", marginBottom: 20 }}
                         >
                             Crea tu propio proyecto
                         </Typography>

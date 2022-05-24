@@ -33,7 +33,7 @@ import {
             <SidenavButton text={"Donaciones"} url="/donaciones">
               <Wallet fontSize="large" sx={{color: "#ba87fa"}}></Wallet>
             </SidenavButton>
-            <SidenavButton text={"Proyectos"} url="/proyectos">
+            <SidenavButton text={"Campañas"} url="/campaigns">
               <SavingsIcon fontSize="large" sx={{color: "#ba87fa"}}></SavingsIcon>
             </SidenavButton>
             <SidenavButton text={"crear"} url="/crear">

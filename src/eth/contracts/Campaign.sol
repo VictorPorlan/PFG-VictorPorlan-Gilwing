@@ -5,18 +5,23 @@ pragma solidity ^0.8.9;
 contract Factory {
     Campaign[] public deployedCampaigns;
     mapping(address => address[]) public donatedTo;
-    mapping(address => address[]) public myCampaigns;
+    mapping(address => Campaign[]) public myCampaigns;
 
     event DeployedAt(Campaign loc);
 
     function createCampaign(uint minimum, string memory titleCont, string memory descriptionCont) public {
         Campaign newCampaign = new Campaign(minimum, titleCont, descriptionCont, msg.sender);
         deployedCampaigns.push(newCampaign);
+        addMyCampaigns(msg.sender, newCampaign);
         emit DeployedAt(newCampaign);
     }
 
     function getDeployedCampaigns() public view returns (Campaign[] memory) {
         return deployedCampaigns;
+    }
+
+    function allMyCampaigns(address index) public view returns (Campaign[] memory){
+        return myCampaigns[index];
     }
 
     function addDonatedTo(address donator, address donatedToFunc) public  {
@@ -25,8 +30,8 @@ contract Factory {
         donatedTo[donator] = addedDonations;
     }
 
-    function addMyCampaigns(address manager, address newCampaign) public  {
-        address[] storage campaigns = myCampaigns[manager];
+    function addMyCampaigns(address manager, Campaign newCampaign) public  {
+        Campaign[] storage campaigns = myCampaigns[manager];
         campaigns.push(newCampaign);
         myCampaigns[manager] = campaigns;
     }
