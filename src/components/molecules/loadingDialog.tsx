@@ -7,7 +7,7 @@ interface IProps {
   open: boolean;
   finished?: boolean;
   message?: string;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 const LoadingDialog: FC<IProps> = ({ open, finished, message, onPress }) => {

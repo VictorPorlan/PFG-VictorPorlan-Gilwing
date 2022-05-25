@@ -25,6 +25,7 @@ const DetailsCampaign: FC = () => {
           title: await instance.methods.title().call(),
           description: await instance.methods.description().call(),
           minimum: await instance.methods.minimumContribution().call(),
+          address: address
         };
         setCampaignData(campaign)
         setCampaign(instance);

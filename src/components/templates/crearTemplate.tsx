@@ -64,10 +64,10 @@ const CrearTemplate: FC<IProps> = ({
                             variant="h3"
                             style={{ color: "#ba87fa", fontFamily: "Oswald", marginBottom: 20 }}
                         >
-                            Crea tu propio proyecto
+                            Crea tu propia camapaña
                         </Typography>
                         <Typography variant="h5">
-                            Escribe un título, una descripción de tu proyecto, y
+                            Escribe un título, una descripción de tu camapaña, y
                             un mínimo de donaciones (Wei)
                         </Typography>
                     </div>
