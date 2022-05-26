@@ -13,8 +13,8 @@ const DetailsCampaign: FC = () => {
     const [campaignData, setCampaignData] = useState<ICampaign>();
     const [nombre, setNombre] = useState("");
     const [comentario, setComentario] = useState("");
-    const [cantidad, setCantidad] = useState(0);
     const [campaign, setCampaign] = useState<any>();
+    const [cantidad, setCantidad] = useState("0");
     useEffect(() => {
         async function fetchData() {
             const deployedCampaigns: string[] = await factory.methods
@@ -25,12 +25,13 @@ const DetailsCampaign: FC = () => {
                 let campaign: ICampaign = {
                     title: await instance.methods.title().call(),
                     description: await instance.methods.description().call(),
-                    minimum: await instance.methods
+                    minimum: (await instance.methods
                         .minimumContribution()
-                        .call(),
+                        .call()).toString(),
                     address: address,
                 };
                 setCampaignData(campaign);
+                setCantidad(web3.utils.fromWei(campaign.minimum.toString(), 'ether'));
                 setCampaign(instance);
             } else {
                 navigate("/");
@@ -56,7 +57,7 @@ const DetailsCampaign: FC = () => {
         setComentario(descripcion);
     };
 
-    const handleCantidad = (cantidad: number) => {
+    const handleCantidad = (cantidad: string) => {
       setCantidad(cantidad);
   };
 

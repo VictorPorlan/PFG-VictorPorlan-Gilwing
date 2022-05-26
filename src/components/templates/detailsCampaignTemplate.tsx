@@ -42,10 +42,10 @@ interface IProps {
     campaignData: ICampaign;
     nombre: string;
     comentario: string;
-    cantidad: number
+    cantidad: string
     handleNombre: (x: string) => void;
     handleComentario: (x: string) => void;
-    handleCantidad: (x: number) => void;
+    handleCantidad: (x: string) => void;
     handleTransaction: () => void;
 }
 
@@ -115,7 +115,7 @@ const DetailsCampaignTemplate: FC<IProps> = ({
                                     margin={"dense"}
                                     value={nombre}
                                     style={{
-                                        margin: "0px 30px 10px 0px",
+                                        margin: "0px 30px 20px 0px",
                                         width: "100%",
                                     }}
                                     onChange={(e) =>
@@ -128,7 +128,7 @@ const DetailsCampaignTemplate: FC<IProps> = ({
                                     margin={"dense"}
                                     value={comentario}
                                     style={{
-                                        margin: "0px 30px 10px 0px",
+                                        margin: "0px 30px 20px 0px",
                                         width: "100%",
                                     }}
                                     onChange={(e) =>
@@ -137,17 +137,16 @@ const DetailsCampaignTemplate: FC<IProps> = ({
                                 />
 
                                 <TextField
-                                    type={"number"}
-                                    label="Cantidad (Wei)"
+                                    label="Cantidad (Eth)"
                                     color={"primary"}
                                     margin={"dense"}
                                     value={cantidad}
                                     style={{
-                                        margin: "0px 30px 10px 0px",
+                                        margin: "0px 30px 20px 0px",
                                         width: "100%",
                                     }}
                                     onChange={(e) =>
-                                        handleCantidad(parseInt(e.target.value))
+                                        handleCantidad(e.target.value)
                                     }
                                     required
                                 />
