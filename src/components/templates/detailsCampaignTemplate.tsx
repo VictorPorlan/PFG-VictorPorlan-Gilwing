@@ -1,4 +1,4 @@
-import { Card } from "@mui/material";
+import { Button, Card, TextField } from "@mui/material";
 import { FC } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { ICampaign } from "../../interfaces/Campaign";
@@ -13,31 +13,56 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         width: "100%",
-        display: "grid",
-        gridTemplateRows: "1fr",
+        display: "flex",
+        flexDirection: "column",
     },
     text: {
         padding: 50,
     },
-    form: {
+    bottom: {
         padding: "25px 50px 50px",
-        display: "flex",
+        display: "grid",
+        gridTemplateColumns: "5fr 2fr",
         [theme.breakpoints.down("sm")]: {
-            flexDirection: "column",
+            gridTemplateColumns: "1fr",
+        },
+    },
+    sideForm: {
+        display: "flex",
+        width: "95%",
+        marginTop: "50px",
+        flexDirection: "column",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "row",
         },
     },
 }));
 
 interface IProps {
     campaignData: ICampaign;
-    campaign: any;
+    nombre: string;
+    comentario: string;
+    cantidad: number
+    handleNombre: (x: string) => void;
+    handleComentario: (x: string) => void;
+    handleCantidad: (x: number) => void;
+    handleTransaction: () => void;
 }
 
-const DetailsCampaignTemplate: FC<IProps> = ({ campaign, campaignData }) => {
+const DetailsCampaignTemplate: FC<IProps> = ({
+    campaignData,
+    nombre,
+    comentario,
+    cantidad,
+    handleNombre,
+    handleComentario,
+    handleCantidad,
+    handleTransaction,
+}) => {
     const classes = useStyles();
     return (
         <>
-            {campaign === undefined ? (
+            {campaignData === undefined ? (
                 <LoadingDialog
                     open={true}
                     finished={false}
@@ -68,6 +93,81 @@ const DetailsCampaignTemplate: FC<IProps> = ({ campaign, campaignData }) => {
                             </Typography>
                         </div>
                     </Card>
+                    <div className={classes.bottom}>
+                        <div>dasdasdasds</div>
+                        <Card className={classes.root}>
+                            <div className={classes.text}>
+                                <Typography
+                                    variant="h3"
+                                    style={{
+                                        color: "#ba87fa",
+                                        fontFamily: "Oswald",
+                                        textAlign: "center",
+                                        marginBottom: "20px",
+                                    }}
+                                >
+                                    Donar
+                                </Typography>
+
+                                <TextField
+                                    label="Nombre"
+                                    color={"primary"}
+                                    margin={"dense"}
+                                    value={nombre}
+                                    style={{
+                                        margin: "0px 30px 10px 0px",
+                                        width: "100%",
+                                    }}
+                                    onChange={(e) =>
+                                        handleNombre(e.target.value)
+                                    }
+                                />
+                                <TextField
+                                    label="Comentario"
+                                    color={"primary"}
+                                    margin={"dense"}
+                                    value={comentario}
+                                    style={{
+                                        margin: "0px 30px 10px 0px",
+                                        width: "100%",
+                                    }}
+                                    onChange={(e) =>
+                                        handleComentario(e.target.value)
+                                    }
+                                />
+
+                                <TextField
+                                    type={"number"}
+                                    label="Cantidad (Wei)"
+                                    color={"primary"}
+                                    margin={"dense"}
+                                    value={cantidad}
+                                    style={{
+                                        margin: "0px 30px 10px 0px",
+                                        width: "100%",
+                                    }}
+                                    onChange={(e) =>
+                                        handleCantidad(parseInt(e.target.value))
+                                    }
+                                    required
+                                />
+
+                                <Button
+                                    variant="contained"
+                                    style={{
+                                        marginLeft: "auto",
+                                        height: 56,
+                                        marginRight: 30,
+                                        marginBottom: 10,
+                                        width: "100%",
+                                    }}
+                                    onClick={handleTransaction}
+                                >
+                                    Iniciar transacción
+                                </Button>
+                            </div>
+                        </Card>
+                    </div>
                 </div>
             )}
         </>

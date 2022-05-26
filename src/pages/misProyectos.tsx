@@ -8,10 +8,12 @@ import { ICampaign } from "../interfaces/Campaign";
 
 const MisProyectos: FC = () => {
     const [campaignsData, setCampaignsData] = useState<ICampaign[]>([])
-
+    const [loading, setLoading] = useState<boolean>(false)
     useEffect(() => {
         async function fetchData(){
+            setLoading(true)
             const accounts = await web3.eth.getAccounts();
+            if(accounts.length > 0){
             const response: string[] = await factory.methods
             .allMyCampaigns(accounts[0])
             .call();
@@ -28,7 +30,8 @@ const MisProyectos: FC = () => {
 
                 }))
                 setCampaignsData(campaingDataTemp)
-            }
+            }}
+            setLoading(false)
         }
         fetchData()
     },[])
@@ -36,7 +39,7 @@ const MisProyectos: FC = () => {
     return (
         <>
             <MainTemplate>
-                <MisProyectosTemplate campaigns={campaignsData}></MisProyectosTemplate>
+                <MisProyectosTemplate campaigns={campaignsData} loading={loading}></MisProyectosTemplate>
             </MainTemplate>
         </>
         )

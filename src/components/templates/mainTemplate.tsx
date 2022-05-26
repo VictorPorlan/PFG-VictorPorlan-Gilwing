@@ -8,7 +8,8 @@ const useStyles = makeStyles(() => ({
   root:{
     display:"flex",
     flexDirection:"row",
-    height:"100vh"
+    height:"100%",
+    minHeight: "100vh"
   },
   content: {
     width:'100%',

@@ -1,12 +1,14 @@
-import { Card } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import { FC } from "react";
 import { ICampaign } from "../../interfaces/Campaign";
 import { makeStyles, Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import LoadingDialog from "../molecules/loadingDialog";
+import CardDisplay from "../organisms/cardDisplay";
 
 interface IProps {
     campaigns?: ICampaign[];
+    loading: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -27,24 +29,14 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "space-between",
     },
-    card: {
-        padding: 50,
-       
-    },
-    form: {
-        padding: "25px 50px 50px",
-        display: "flex",
-        [theme.breakpoints.down("sm")]: {
-            flexDirection: "column",
-        },
-    },
+
 }));
 
-const MisProyectosTemplate: FC<IProps> = ({ campaigns }) => {
+const MisProyectosTemplate: FC<IProps> = ({ campaigns, loading }) => {
     const classes = useStyles();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    return campaigns !== undefined && campaigns.length !== 0 ? (
+    return !loading ? (
         <>
             <div className={classes.content}>
                 <Card className={classes.root}>
@@ -59,40 +51,59 @@ const MisProyectosTemplate: FC<IProps> = ({ campaigns }) => {
                             variant="h3"
                             style={{ color: "#ba87fa", fontFamily: "Oswald" }}
                         >
-                            Cantidad: {campaigns.length}
+                            Cantidad: {campaigns?.length}
                         </Typography>
                     </div>
                 </Card>
                 <div className={classes.root}>
-                    {campaigns.map((x) => {
+                    {campaigns?.map((x) => {
                         return (
-                            <Card
-                                className={classes.card}
-                                style={{ margin: "20px 0px" }}
-                                onClick={() => navigate(`/campaigns/${x.address}`)}
-                                key={x.address}
-                            >
-                                <Typography
-                                    variant="h5"
-                                    style={{
-                                        color: "#ba87fa",
-                                        fontFamily: "Oswald",
-                                        marginBottom: 20,
-                                    }}
-                                >
-                                    {x.title}
-                                </Typography>
-                                <Typography variant="h6">
-                                    {x.description}
-                                </Typography>
-                            </Card>
+                            <CardDisplay title={x.title} description={x.description} address={x.address}/>
                         );
                     })}
+                    {campaigns?.length === 0 ? (
+                        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                            <Typography
+                                variant="h4"
+                                style={{
+                                    fontFamily: "Oswald",
+                                    color: "#ba87fa",
+                                }}
+                                align="center"
+                            >
+                                No se han encontrado campañas
+                            </Typography>
+                            <Typography
+                                variant="h5"
+                                style={{
+                                    fontFamily: "Oswald",
+                                    color: "#ba87fa",
+                                }}
+                                align="center"
+                            >
+                                Pulsa este botón para acceder a la página de
+                                creación de campañas
+                            </Typography>
+                            <Button
+                                variant="contained"
+                                color="success"
+                                onClick={() => navigate("/crear")}
+                                style={{width:"100px", margin: 20}}
+                            >
+                                Crear
+                            </Button>
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             </div>
         </>
     ) : (
-        <LoadingDialog message={"Cargando, por favor espere..."} open={campaigns?.length === 0}/>
+        <LoadingDialog
+            message={"Cargando, por favor espere..."}
+            open={loading}
+        />
     );
 };
 export default MisProyectosTemplate;

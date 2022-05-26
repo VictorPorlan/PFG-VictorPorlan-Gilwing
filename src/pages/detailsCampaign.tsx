@@ -8,42 +8,74 @@ import DetailsCampaignTemplate from "../components/templates/detailsCampaignTemp
 import { ICampaign } from "../interfaces/Campaign";
 
 const DetailsCampaign: FC = () => {
-  const { address } = useParams();
-  const navigate = useNavigate();
-  const [campaign, setCampaign] = useState<any>();
-  const [campaignData, setCampaignData] = useState<ICampaign>();
+    const { address } = useParams();
+    const navigate = useNavigate();
+    const [campaignData, setCampaignData] = useState<ICampaign>();
+    const [nombre, setNombre] = useState("");
+    const [comentario, setComentario] = useState("");
+    const [cantidad, setCantidad] = useState(0);
+    const [campaign, setCampaign] = useState<any>();
+    useEffect(() => {
+        async function fetchData() {
+            const deployedCampaigns: string[] = await factory.methods
+                .getDeployedCampaigns()
+                .call();
+            if (address && deployedCampaigns.includes(address)) {
+                const instance = new web3.eth.Contract(Campaign.abi, address);
+                let campaign: ICampaign = {
+                    title: await instance.methods.title().call(),
+                    description: await instance.methods.description().call(),
+                    minimum: await instance.methods
+                        .minimumContribution()
+                        .call(),
+                    address: address,
+                };
+                setCampaignData(campaign);
+                setCampaign(instance);
+            } else {
+                navigate("/");
+            }
+        }
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      // const accounts = await web3.eth.getAccounts()
-      const deployedCampaigns: string[] = await factory.methods
-        .getDeployedCampaigns()
-        .call();
-      if (address && deployedCampaigns.includes(address)) {
-        const instance = new web3.eth.Contract(Campaign.abi, address);
-        let campaign: ICampaign = {
-          title: await instance.methods.title().call(),
-          description: await instance.methods.description().call(),
-          minimum: await instance.methods.minimumContribution().call(),
-          address: address
-        };
-        setCampaignData(campaign)
-        setCampaign(instance);
-      } else {
-        navigate("/");
-      }
-    }
-    fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const handleNewDonator = async () => {
+        const accounts = await web3.eth.getAccounts();
+        console.log(cantidad)
+        await campaign.methods
+            .newDonatorContribution(nombre, comentario)
+            .send({ from: accounts[0], value: web3.utils.toWei(cantidad)});
+    };
 
-  return (
-    <>
-      <MainTemplate>
-        <DetailsCampaignTemplate campaign={campaign} campaignData= {campaignData as ICampaign}></DetailsCampaignTemplate>
-      </MainTemplate>
-    </>
-  );
+    const handleNombre = (titulo: string) => {
+        setNombre(titulo);
+    };
+
+    const handleComentario = (descripcion: string) => {
+        setComentario(descripcion);
+    };
+
+    const handleCantidad = (cantidad: number) => {
+      setCantidad(cantidad);
+  };
+
+    return (
+        <>
+            <MainTemplate>
+                <DetailsCampaignTemplate
+                    campaignData={campaignData as ICampaign}
+                    nombre={nombre}
+                    comentario={comentario}
+                    cantidad={cantidad}
+                    handleComentario={handleComentario}
+                    handleNombre={handleNombre}
+                    handleTransaction={handleNewDonator}
+                    handleCantidad={handleCantidad}
+                ></DetailsCampaignTemplate>
+            </MainTemplate>
+        </>
+    );
 };
 
 export default DetailsCampaign;
