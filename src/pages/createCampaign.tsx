@@ -12,7 +12,7 @@ const CreateCampaign: FC = () => {
 
     const navigate = useNavigate()
 
-    const [message, setMessage] = useState("Procesando transacción");
+    const [message, setMessage] = useState("Procesando transacción...");
     const [finished, setFinished] = useState(false);
     const [open, setOpen] = useState(false);
     const [address, setAddress] = useState("")

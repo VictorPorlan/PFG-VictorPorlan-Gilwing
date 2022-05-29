@@ -58,11 +58,11 @@ const MisProyectosTemplate: FC<IProps> = ({ campaigns, loading }) => {
                 <div className={classes.root}>
                     {campaigns?.map((x) => {
                         return (
-                            <CardDisplay title={x.title} description={x.description} address={x.address}/>
+                            <CardDisplay title={x.title} description={x.description} address={x.address}  key={x.address}/>
                         );
                     })}
                     {campaigns?.length === 0 ? (
-                        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}} key={"key"}>
                             <Typography
                                 variant="h4"
                                 style={{

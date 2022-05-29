@@ -79,6 +79,10 @@ contract Campaign  {
         return membersList;
     }
 
+   function getTransactions () public view returns(Transaction[]memory){
+        return transactions;
+    }
+
     function newDonatorContribution(string memory nameDonator, string memory commentDonator) public payable {
         require(msg.value > minimumContribution);
         require(!members[msg.sender].exists);
@@ -112,5 +116,9 @@ contract Campaign  {
 
         payable(recipientTransact).transfer(amountTransact);
         transactions.push(newTransaction);
+    }
+
+    function balance () public view returns(uint256){
+        return address(this).balance;
     }
 }
