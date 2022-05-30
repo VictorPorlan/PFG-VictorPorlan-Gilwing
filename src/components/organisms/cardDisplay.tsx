@@ -66,6 +66,7 @@ const CardDisplay: FC<IProps> = ({
                     variant="subtitle2"
                     style={{ marginTop: 10 }}
                     className={classes.subText}
+                    noWrap
                 >
                     {address}
                 </Typography>

@@ -4,13 +4,13 @@ pragma solidity ^0.8.9;
 
 contract Factory {
     Campaign[] public deployedCampaigns;
-    mapping(address => address[]) public donatedTo;
+    mapping(address => Campaign[]) public donatedTo;
     mapping(address => Campaign[]) public myCampaigns;
 
     event DeployedAt(Campaign loc);
 
     function createCampaign(uint minimum, string memory titleCont, string memory descriptionCont) public {
-        Campaign newCampaign = new Campaign(minimum, titleCont, descriptionCont, msg.sender);
+        Campaign newCampaign = new Campaign(minimum, titleCont, descriptionCont, msg.sender, address(this));
         deployedCampaigns.push(newCampaign);
         addMyCampaigns(msg.sender, newCampaign);
         emit DeployedAt(newCampaign);
@@ -24,8 +24,12 @@ contract Factory {
         return myCampaigns[index];
     }
 
-    function addDonatedTo(address donator, address donatedToFunc) public  {
-        address[] storage addedDonations = donatedTo[donator];
+   function allMyDonatedTo(address index) public view returns (Campaign[] memory){
+        return donatedTo[index];
+    }
+
+    function addDonatedTo(address donator, Campaign donatedToFunc) public  {
+        Campaign[] storage addedDonations = donatedTo[donator];
         addedDonations.push(donatedToFunc);
         donatedTo[donator] = addedDonations;
     }
@@ -55,7 +59,7 @@ contract Campaign  {
         uint date;
         Donation[] donations;
     }
-
+    address public originalFactory;
     address public manager;
     uint public minimumContribution;
     string public title;
@@ -64,11 +68,12 @@ contract Campaign  {
     mapping(address => Donator) public members;
     Transaction[] public transactions;
 
-    constructor (uint minimum, string memory titleCont, string memory descriptionCont, address managerCont) {
+    constructor (uint minimum, string memory titleCont, string memory descriptionCont, address managerCont, address originalFactoryCont) {
         manager = managerCont;
         minimumContribution = minimum;
         title = titleCont;
         description = descriptionCont;
+        originalFactory = originalFactoryCont;
     }
     
     function getDonations (address donator) public view returns(Donation[]memory){
@@ -94,6 +99,8 @@ contract Campaign  {
 
         Donation memory newDonation = Donation({amount: msg.value, comment:commentDonator});
         newDonator.donations.push(newDonation);
+        Factory factory = Factory(originalFactory);
+        factory.addDonatedTo(msg.sender, this);
     }
 
     function addDonation(string memory commentDonator) public payable {

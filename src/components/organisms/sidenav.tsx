@@ -8,18 +8,21 @@ import {
   import SavingsIcon from '@mui/icons-material/Savings';
   import Plus from '@mui/icons-material/Add';
 
-  const useStyles = makeStyles(() => ({
+  const useStyles = makeStyles((theme) => ({
     root: {
       backgroundColor: "#1C1C1F",
-      width:100,
       height: "100vh",
       display: "flex",
       flexDirection: "column",
       justifyItems: "start",
       position: "fixed",
       overflowX: "hidden",
-      
+      [theme.breakpoints.down('md')]: {
+        flexDirection: "row",
+        height: "100px",
+        width:"100vw",
     },
+  }
     
   }));
   

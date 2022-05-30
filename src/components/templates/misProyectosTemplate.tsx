@@ -18,16 +18,20 @@ const useStyles = makeStyles((theme) => ({
         alignSelf: "center",
         marginTop: "50px",
     },
-
+    
     content: {
         width: "100%",
         display: "grid",
         gridTemplateRows: "1fr",
     },
+    
     text: {
         padding: 50,
         display: "flex",
         justifyContent: "space-between",
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: "column",
+        },
     },
 
 }));
@@ -35,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 const MisProyectosTemplate: FC<IProps> = ({ campaigns, loading }) => {
     const classes = useStyles();
     const navigate = useNavigate();
+    const isSmall = window.innerWidth < 720 
 
     return !loading ? (
         <>
@@ -43,13 +48,13 @@ const MisProyectosTemplate: FC<IProps> = ({ campaigns, loading }) => {
                     <div className={classes.text}>
                         <Typography
                             variant="h3"
-                            style={{ color: "#ba87fa", fontFamily: "Oswald" }}
+                            style={{ color: "#ba87fa", fontFamily: "Oswald", margin: "20px 0px" }}
                         >
                             Mis campañas
                         </Typography>
                         <Typography
                             variant="h3"
-                            style={{ color: "#ba87fa", fontFamily: "Oswald" }}
+                            style={{ color: "#ba87fa", fontFamily: "Oswald", margin: "20px 0px" }}
                         >
                             Cantidad: {campaigns?.length}
                         </Typography>
@@ -58,7 +63,7 @@ const MisProyectosTemplate: FC<IProps> = ({ campaigns, loading }) => {
                 <div className={classes.root}>
                     {campaigns?.map((x) => {
                         return (
-                            <CardDisplay title={x.title} description={x.description} address={x.address}  key={x.address}/>
+                            <CardDisplay title={x.title} description={x.description} address={x.address}  key={x.address} disableChevron={isSmall}/>
                         );
                     })}
                     {campaigns?.length === 0 ? (

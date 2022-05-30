@@ -14,10 +14,9 @@ const useStyles = makeStyles((theme) => ({
         'cards'
         `,
     },
-    height: "95%",
+    padding: 50,
+    margin: "50px 50px 0px",
     width: "95%",
-    justifySelf: "center",
-    alignSelf: "center",
     display: "grid",
     gridTemplateRows: "100px 1fr",
     gridTemplateColumns: "1fr 1fr",

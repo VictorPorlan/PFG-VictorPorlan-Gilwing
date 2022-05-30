@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CardMember: FC<{ member: IMember }> = ({ member }) => {
     const classes = useStyles();
+    const isSmall = window.innerWidth < 720 
 
     return (
         <Card
@@ -51,7 +52,9 @@ const CardMember: FC<{ member: IMember }> = ({ member }) => {
                         style={{
                             marginBottom: 20,
                             textAlign: "center",
+                            maxWidth:isSmall ? "50vw" : "none"
                         }}
+                        noWrap
                     >
                         {member.address}
                     </Typography>

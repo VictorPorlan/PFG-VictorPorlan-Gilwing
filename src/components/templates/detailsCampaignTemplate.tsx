@@ -6,6 +6,7 @@ import LoadingDialog from "../molecules/loadingDialog";
 import CardMember from "../organisms/cardMember";
 import web3 from "../../utils/web3";
 import CardDisplay from "../organisms/cardDisplay";
+import ErrorDialog from "../molecules/errorDialog";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         alignSelf: "center",
         display: "grid",
         gridTemplateColumns: "5fr 2fr",
-        [theme.breakpoints.down("xs")]: {
+        [theme.breakpoints.down("md")]: {
             gridTemplateColumns: "1fr",
         },
     },
@@ -44,10 +45,17 @@ const useStyles = makeStyles((theme) => ({
         margin: "20px 0px 0px 20px",
         alignSelf: "start",
         flexDirection: "column",
-        [theme.breakpoints.down("sm")]: {
-            flexDirection: "row",
+        [theme.breakpoints.down("md")]: {
+            gridRow: 0,
+            margin: "20px 0px 0px 0px",
         },
     },
+    cardDisplayer: {
+        marginTop: 20,
+        [theme.breakpoints.down("md")]: {
+            gridRow: 3,
+        },
+    }
 }));
 
 interface IProps {
@@ -65,6 +73,7 @@ interface IProps {
     finished: boolean;
     open: boolean;
     balance:string;
+    error: boolean;
     handleNombre: (x: string) => void;
     handleComentario: (x: string) => void;
     handleCantidad: (x: string) => void;
@@ -91,6 +100,7 @@ const DetailsCampaignTemplate: FC<IProps> = ({
     message,
     finished,
     balance,
+    error,
     handleNombre,
     handleComentario,
     handleCantidad,
@@ -112,6 +122,14 @@ const DetailsCampaignTemplate: FC<IProps> = ({
                 />
             ) : (
                 <div className={classes.content}>
+                     <ErrorDialog
+                        error={error}
+                        title="Ha ocurrido un error en la transacción"
+                        message={
+                        `Es posible que el fallo haya sido ocasionado por una falta de gas
+                        o por un fallo de conexión`}
+                        onPress={() => window.location.reload()}
+                    />
                     <LoadingDialog
                         open={open}
                         finished={finished}
@@ -152,7 +170,7 @@ const DetailsCampaignTemplate: FC<IProps> = ({
                         </div>
                     </Card>
                     <div className={classes.bottom}>
-                        <div style={{ marginTop: 20 }}>
+                        <div className={classes.cardDisplayer}>
                             <div className={classes.buttons}>
                                 <Button
                                     variant="contained"

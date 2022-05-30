@@ -25,7 +25,7 @@ const DetailsCampaign: FC = () => {
     const [description, setDescription] = useState("");
     const [recipient, setRecipient] = useState("");
     const [cantidadTransact, setCantidadTransact] = useState("0.0");
-
+    const [error, setError] = useState(false)
     useEffect(() => {
         async function fetchData() {
             const deployedCampaigns: string[] = await factory.methods
@@ -111,7 +111,9 @@ const DetailsCampaign: FC = () => {
             }
             setFinished(true)
             setMessage("La donación se ha realizado con éxito")
-        } catch (e) {}
+        } catch (e) {
+            setError(true)
+        }
     };
 
     const handleMakeTransaction = async () => {
@@ -130,7 +132,9 @@ const DetailsCampaign: FC = () => {
                 setFinished(true)
                 setMessage("La transacci se ha realizado con éxito")
         }
-        catch(e){}
+        catch(e){
+            setError(true)
+        }
     };
 
     const handleNombre = (titulo: string) => {
@@ -179,6 +183,7 @@ const DetailsCampaign: FC = () => {
                     finished={finished}
                     open={open}
                     balance={balance}
+                    error={error}
                     handleComentario={handleComentario}
                     handleNombre={handleNombre}
                     handleTransaction={handleNewDonator}

@@ -3,13 +3,12 @@ import {
   } from "@material-ui/core";
   import { FC } from "react";
   import MainHeader from "../molecules/mainHeader";
-import MainTemplate from "./mainTemplate";
   
   const useStyles = makeStyles(() => ({
     content: {
-      width:'100%',
-      display:"grid",
-      gridTemplateRows:"500px 1fr"
+      width: "100%",
+      display: "flex",
+      justifyContent: "center"
     },
     
   }));
@@ -19,11 +18,10 @@ import MainTemplate from "./mainTemplate";
     
     return (
       <>
-      <MainTemplate >
         <div className={classes.content}>
             <MainHeader></MainHeader>
         </div>
-        </MainTemplate>
+
       </>
     );
   };
