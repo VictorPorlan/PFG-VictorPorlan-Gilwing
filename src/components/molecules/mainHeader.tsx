@@ -6,7 +6,7 @@ import image from "../../assets/Gilwing1.png"
 const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.down('md')]: {
-        gridTemplateRows: "100px 1fr 1fr",
+        gridTemplateRows: "140px 1fr 1fr",
         gridTemplateColumns: "1fr",
         gridTemplateAreas: `
         'header'
@@ -14,11 +14,12 @@ const useStyles = makeStyles((theme) => ({
         'cards'
         `,
     },
-    padding: 50,
-    margin: "50px 50px 0px",
     width: "95%",
+    justifySelf: "center",
+    alignSelf: "center",
+    marginTop: "50px",
     display: "grid",
-    gridTemplateRows: "100px 1fr",
+    gridTemplateRows: "140px 1fr",
     gridTemplateColumns: "1fr 1fr",
     gridTemplateAreas: `
     'header header'
@@ -28,14 +29,21 @@ const useStyles = makeStyles((theme) => ({
 
   secondaryCard: {
     [theme.breakpoints.down('md')]: {
-      gridRow:3
+      gridRow:3,
+      marginTop: 40,
   },
+    display:'flex',
     gridRow: "2",
+    textAlign: "center",
     width: "60%",
     height: "70%",
-    justifySelf: "center",
+    justifySelf: "flex-end",
     alignSelf: "center",
     padding: 20,
+    alignItems:"center",
+    justifyContent: "center",
+    marginRight: 50,
+    marginBottom: 50
   },
 
   subtitle: {
@@ -46,21 +54,27 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     flexDirection: "column",
     height:"50%",
-    paddingLeft:50
+    paddingLeft:50,
+    marginBottom: 50
   },
 }));
 
-const MainHeader: FC = () => {
+interface IProps {
+  cantidad: number
+}
+
+const MainHeader: FC<IProps> = ({cantidad}) => {
   const classes = useStyles();
 
   return (
-    <>
+    
       <Card className={classes.root}>
         <div
           style={{
             gridArea: "header",
             display: "flex",
             justifyContent: "center",
+            marginTop:"40px"
           }}
         >
           <img
@@ -83,9 +97,16 @@ const MainHeader: FC = () => {
         <Card
           className={classes.secondaryCard}
           sx={{ backgroundColor: "#31313C" }}
-        ></Card>
+        >
+           <Typography variant="h3" style={{ fontFamily:"Oswald" }}>
+            Proyectos creados con Gilwing: 
+          <Typography variant="h3" style={{ color:"#ba87fa", fontFamily:"Oswald" }}>
+            {cantidad}
+          </Typography>
+          </Typography>
+        </Card>
       </Card>
-    </>
+
   );
 };
 

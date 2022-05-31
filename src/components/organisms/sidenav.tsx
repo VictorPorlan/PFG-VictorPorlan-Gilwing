@@ -33,7 +33,7 @@ import {
       <>
         <div className={classes.root}>
             <Logo></Logo>
-            <SidenavButton text={"Donaciones"} url="/donaciones">
+            <SidenavButton text={"Donaciones"} url="/donations">
               <Wallet fontSize="large" sx={{color: "#ba87fa"}}></Wallet>
             </SidenavButton>
             <SidenavButton text={"Campañas"} url="/campaigns">

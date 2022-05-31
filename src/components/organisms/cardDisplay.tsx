@@ -41,6 +41,8 @@ const CardDisplay: FC<IProps> = ({
 }) => {
     const classes = useStyles();
     const navigate = useNavigate();
+    const isSmall = window.innerWidth < 720;
+
     return (
         <Card
             className={disableCursor ? classes.cardNoCursor : classes.card}
@@ -64,7 +66,8 @@ const CardDisplay: FC<IProps> = ({
                 </Typography>
                 <Typography
                     variant="subtitle2"
-                    style={{ marginTop: 10 }}
+                    style={{ marginTop: 10, maxWidth:isSmall ? "50vw" : "none"
+                }}
                     className={classes.subText}
                     noWrap
                 >
