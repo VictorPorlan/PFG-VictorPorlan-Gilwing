@@ -96,13 +96,13 @@ const MainHeader: FC<IProps> = ({cantidad}) => {
         </div>
         <Card
           className={classes.secondaryCard}
-          sx={{ backgroundColor: "#31313C" }}
+          sx={{ backgroundColor: "#31313C", display:"flex", flexDirection: "column" }}
         >
            <Typography variant="h3" style={{ fontFamily:"Oswald" }}>
             Proyectos creados con Gilwing: 
+          </Typography>
           <Typography variant="h3" style={{ color:"#ba87fa", fontFamily:"Oswald" }}>
             {cantidad}
-          </Typography>
           </Typography>
         </Card>
       </Card>

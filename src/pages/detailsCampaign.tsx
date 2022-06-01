@@ -97,13 +97,13 @@ const DetailsCampaign: FC = () => {
             setOpen(true)
             const accounts = await web3.eth.getAccounts();
             if (member?.exists) {
-                await campaign.methods.addDonation(comentario).send({
+                await campaign.methods.addDonation(comentario === "" ? "Sin comentario" : comentario).send({
                     from: accounts[0],
                     value: web3.utils.toWei(cantidad),
                 });
             } else {
                 await campaign.methods
-                    .newDonatorContribution(nombre, comentario)
+                    .newDonatorContribution(nombre === ""? "Anon" : nombre, comentario === "" ? "Sin comentario" : comentario)
                     .send({
                         from: accounts[0],
                         value: web3.utils.toWei(cantidad),

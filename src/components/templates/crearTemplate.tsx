@@ -71,7 +71,7 @@ const CrearTemplate: FC<IProps> = ({
                             un mínimo de donaciones (Wei)
                         </Typography>
                     </div>
-                    <div className={classes.form}>
+                    <form className={classes.form}>
                         <TextField
                             label="Título"
                             color={"primary"}
@@ -111,10 +111,11 @@ const CrearTemplate: FC<IProps> = ({
                                 marginBottom: 10,
                             }}
                             onClick={handleCreate} 
+                            disabled= {minimo === 0 ||descripcion === "" || titulo === ""}
                         >
                             Crear
                         </Button>
-                    </div>
+                    </form>
                 </Card>
             </div>
             <LoadingDialog message={message} open={open} finished={finished} onPress={handleOnPressDialog}/>

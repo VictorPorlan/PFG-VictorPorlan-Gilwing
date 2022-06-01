@@ -76,7 +76,7 @@ const MisDonacionesTemplate: FC<IProps> = ({ campaigns, loading }) => {
                                 }}
                                 align="center"
                             >
-                                No se han encontrado campañas
+                                No se han encontrado donaciones
                             </Typography>
                             <Typography
                                 variant="h5"
@@ -87,15 +87,15 @@ const MisDonacionesTemplate: FC<IProps> = ({ campaigns, loading }) => {
                                 align="center"
                             >
                                 Pulsa este botón para acceder a la página de
-                                creación de campañas
+                                inicio y buscar una campaña a la que donar.
                             </Typography>
                             <Button
                                 variant="contained"
                                 color="success"
-                                onClick={() => navigate("/crear")}
+                                onClick={() => navigate("/")}
                                 style={{width:"100px", margin: 20}}
                             >
-                                Crear
+                                Volver
                             </Button>
                         </div>
                     ) : (
