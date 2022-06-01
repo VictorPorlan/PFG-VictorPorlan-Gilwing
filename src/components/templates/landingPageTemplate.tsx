@@ -50,6 +50,40 @@ const LangingPageTemplate: FC<IProps> = ({
                             marginTop: "50px",
                         }}
                     >
+
+                        
+                        {campaignsData?.length === 0 ? (
+                            <div style={{display:"flex", flexDirection:"column", alignItems:"center"}} key={"key"}>
+                            <Typography
+                                variant="h4"
+                                style={{
+                                    fontFamily: "Oswald",
+                                    color: "#ba87fa",
+                                }}
+                                align="center"
+                                >
+                                No se han encontrado campañas
+                            </Typography>
+                            <Typography
+                                variant="h5"
+                                style={{
+                                    fontFamily: "Oswald",
+                                    color: "#ba87fa",
+                                }}
+                                align="center"
+                                >
+                                Aún no hay ningúna campaña creada en gilwing. ¡Se el primero en crear una y empieza ya a usar los beneficios de la blockchain y la descentralización!
+                            </Typography>
+                            <Button
+                                variant="contained"
+                                color="success"
+                                onClick={() => navigate("/crear")}
+                                style={{width:"100px", margin: 20}}
+                                >
+                                Crear
+                            </Button>
+                        </div>
+                    ) : (
                         <div style={{display: "flex", alignItems: "center"}}>
                          <TextField
                             label="Buscar Dirección"
@@ -59,12 +93,14 @@ const LangingPageTemplate: FC<IProps> = ({
                             value={address}
                             onChange={(e) => handleAddress(e.target.value)}
                             required
-                        />
+                            />
                         <IconButton onClick={() => navigate(`campaigns/${address}`)} disabled={address === ""}>
                         <Search fontSize="large" sx={{color:address === "" ? "grey" : "#ba87fa"}}/>
                         </IconButton>
                         </div>
-                        {campaignsData?.map((x) => {
+                    )}
+                        {
+                        campaignsData?.map((x) => {
                             return (
                                 <CardDisplay
                                     title={x.title}
@@ -75,40 +111,6 @@ const LangingPageTemplate: FC<IProps> = ({
                                 />
                             );
                         })}
-                        {campaignsData?.length === 0 ? (
-                        <div style={{display:"flex", flexDirection:"column", alignItems:"center"}} key={"key"}>
-                            <Typography
-                                variant="h4"
-                                style={{
-                                    fontFamily: "Oswald",
-                                    color: "#ba87fa",
-                                }}
-                                align="center"
-                            >
-                                No se han encontrado campañas
-                            </Typography>
-                            <Typography
-                                variant="h5"
-                                style={{
-                                    fontFamily: "Oswald",
-                                    color: "#ba87fa",
-                                }}
-                                align="center"
-                            >
-                                Aún no hay ningúna campaña creada en gilwing. ¡Se el primero en crear una y empieza ya a usar los beneficios de la blockchain y la descentralización!
-                            </Typography>
-                            <Button
-                                variant="contained"
-                                color="success"
-                                onClick={() => navigate("/crear")}
-                                style={{width:"100px", margin: 20}}
-                            >
-                                Crear
-                            </Button>
-                        </div>
-                    ) : (
-                        <></>
-                    )}
                     </div>
                 </div>
             </>
