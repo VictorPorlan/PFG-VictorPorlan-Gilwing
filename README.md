@@ -23,7 +23,23 @@
   - [Análisis previo](#análisis-previo)
 
     - [Historias de usuario](#historias-de-usuario)
+    - [Modelo de datos](#modelo-de-datos)
     - [Wireframes](#wireframes)
+
+  - [Proceso de implementación](#proceso-de-implementación)
+
+    - [Fases](#fases)
+    - [Problemas](#problemas)
+    - [Metodologías](#metodologías)
+
+  - [Producción](#producción)
+  
+    - [Resultado final](#resultado-final)
+    - [Despliegue](#despliegue)
+
+  - [Resultados y conclusiones](#resultados-y-conclusiones)
+
+  - [Bibliografía](#bibliografía)
 
 ## Introducción
 
@@ -172,6 +188,12 @@ Si el usuario así lo quiere podrá volver a donar a la misma campaña. Se recor
 
 ![Donar](./doc/readmePics/DonarOtraVez_HU.png)
 
+### Modelo de datos
+
+---
+
+![Modelo](./doc/readmePics/ModeloDeDatos.png)
+
 
 ### Wireframes
 
@@ -195,4 +217,87 @@ Como podemos comprobar se acabó optando por un diseño más funcional, el cual 
 
 En un pricipio se planteó el uso de una librería de generación aleatoria de fotos de perfil, las cuales se generarían en base a la address del usuario, pero sentí que rompería con la estética de la aplicación en gran medida, ya que algunos rompían la paleta de colores utilizada en la web. Las cards también crecieron en tamaño por el sistema de perfiles que se implementó en la aplicación durante el desarrollo.
 
+### Proceso de implementación
 
+---
+
+#### Fases
+
+---
+
+- **Smart contracts**: El desarrollo de la aplicación empezó creando los dos smart contracts de la aplicación, Factory y Campaign. La Factory es simplemente un intermediario entre el usuario y la creación de las campañas para mantener el proceso bajo control, y en Campaign encontramos toda la lógica básica de la aplicación.
+
+- **Testing**: En esta fase se hizo el testeo de las funciones básicas de los smart contracts.
+
+- **Diseño de wireframes**: Durante esta fase se hicieron los wireframes y se encargó el logo de la aplicación.
+
+- **Frontend**: Basándose en los wireframes anteriormente diseñados, se hizo un frontend reactivo con una paleta de colores homogénea y sin demasiados colores, optando por un tema oscuro y agradable a la vista. Durante esta fase también se hizo la unión entre el frontend y la blockchain, la cual se especuló en el anteproyecto que se haría con unos Gateways, pero esta idea fue finalmente descartada.
+
+- **Despliegue**: Usando un servidor cloud de Ionos, se desplegó la aplicación utilizando Apache, y para poder utilizar **https** se utilizó un bot de generación de certificados SSL válidos llamado Certbot. (Recomendado por [Alejo Morell](https://github.com/Yukics))
+
+#### Problemas
+
+---
+
+- **Webpack 5 y Web3**: Durante la implementación de la lógica del proyecto en el frontend usando web3 hubo un problema de compatibilidad de web3 con la última version de webpack, ya que eliminaron los polyfills de esta. La solución fue bajar la versión de react scripts a la versión 4 con un comando encontrado en un foro.
+
+#### Metodologías
+
+---
+
+- **En cascada**: El desarrollo del proyecto fue en cascada, intentando obtener un producto mínimo en cada etapa del desarrollo antes de intentar pasar a la siguiente.
+
+### Producción
+
+---
+
+#### Resultado final
+
+---
+
+- **Landing page**: Página inicial donde podremos encontrar las campañas y tendremos acceso a un buscador directo de las mismas.
+
+![Landing_pro](./doc/readmePics/Main_ss.png)
+
+- **Crear**: Formulario para crear una campaña, nos pedirán un título, una descripción y una cantidad mínima de donaciones para la campaña.
+
+![Landing_pro](./doc/readmePics/Crear_ss.png)
+
+- **Mis campañas**: Lista de las campañas que has creado y de las que eres mánager.
+
+![Landing_pro](./doc/readmePics/MisCampañas_ss.png)
+
+- **Mis donaciones**: Lista de las campañas a las que has donado.
+
+![Landing_pro](./doc/readmePics/MisDonaciones_ss.png)
+
+- **Campaign**: La página de detalles de la campaña donde prodrás ver las donaciones recibidas y las transacciones realizadas. Dependiendo de si eres el mánager o no, a la derecha aparecerá un formulario para donar o para hacer una transacción.
+
+![Landing_pro](./doc/readmePics/MisCampañas_ss.png)
+
+#### Despliegue
+
+---
+
+Con un servidor web cloud en IONOS se ha desplegado la aplicación utilizando Apache. Se generó una versión de producción en el servidor de la aplicación de react y se puso como directorio base en el archivo de configuración de apache.
+
+Luego, usando Certbot se generó un certificado SSL para poder utilizar el protocolo **https**, principalmente para poder ser usado desde el navegador de Metamask en moviles, el cual solo hacepta este protocolo por motivos de seguridad.
+
+### Resultados y conclusiones
+
+Por lo general puedo decir que el proyecto ha resultado ser aproximadamente lo que esperaba. En general la cantidad de funcionalidades estimadas para el proyecto fueron las que al final se realizaron, habiendo algunas que se plantearon como posibles en el caso de que el tiempo fuera más que suficiente, las cuales finalmente se han descartado, como por ejemplo un sistema de votaciones para aceptar o denegar las transacciones, un sistema de devolución del dinero, y también algun sistema de recompensas automatizado.
+
+Las únicas cosas que variaron de la visión inicial fue, por ejemplo, el sistema de perfiles de donaciones, el cual inicialmente ni se planteó, pero a medida que se diseñaba el smart contract vi que facilitaría mucho el sistema de donar varias veces con una misma cuenta.
+
+Otro sistema que no plantee en un principio fue el de almacenamiento de Mis campañas y Mis donaciones ya que no se me ocurría una buena forma de hacerlo, pero durante el desarrollo me di cuenta de que podía utilizar la propia factory para almacenar las campañas que se requería, ya que actuaba como punto común entre todas las campañas.
+
+En un futuro, como he mencionado antes se podrían añadir las funcionalidades de recompensas, votaciones y de devolución de ether. También una posible mejora a la personalización de las campañas, permitiendote modificar el título y descripción. Se podría añadir incluso una forma de subir imágenes a la campaña con el uso de urls, ya que en la blockchain no es recomendable el almacenamiento de imágenes.
+
+### Bibliografía
+
+- [Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/)
+
+- [Stackoverflow](https://stackoverflow.co/)
+
+- [Mui](https://mui.com/)
+  
