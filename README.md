@@ -4,6 +4,8 @@
 
 ![logo](./src/assets/Gilwing1.png)
 
+---
+
 ### Índice
 
 - [Introducción](#introducción)
@@ -40,6 +42,10 @@
   - [Resultados y conclusiones](#resultados-y-conclusiones)
 
   - [Bibliografía](#bibliografía)
+
+Antes de empezar a usar la aplicación recomendamos usar esta guia para la instalación y configuración de Metamask:
+
+#### [Como usar Metamask con Gilwing](./doc/howToUse/howToUse.md)
 
 ## Introducción
 
