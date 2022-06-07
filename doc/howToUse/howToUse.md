@@ -28,6 +28,7 @@ En el caso de que tengas una frase de recuperación y quieras usar tu cuenta pri
 - Después de aceptar o denegar nos aparecerá un formulario de creación de contraseña. Pon la que desees y recuerdala.
   
 Después de poner una contraseña aparecerá lo siguiente:
+
 ![mnemonic](./mnemonic.png)
 
 - La **Mnemonic phrase** es una frase formada por 12 palabras la cuál es la única forma que hay de acceder a tu cuenta y **NO SE PUEDE CAMBIAR NI RECUPERAR**, si quieres conservar esta cuenta y usarla en otros dispositivos recomendamos que se guarde, ya sea en una imagen o en un documento de texto. Con esta misma mnemonic phrase podremos generar infinidad de direcciones o cuentas, con cantidades de ether totalmente independientes y sin interconexión, excepto por la mnemonic phrase.
