@@ -43,6 +43,7 @@ Gilwing funciona en la red de testing de ethereum, más concretamente en Rinkeby
 **Recomiendo cerrar la pestaña donde se realizó la instalación y creación de cuenta y trabajar con la extensión del navegador directamente. Debería de aparece el icono arriba a la derecha para abrirlo.**
 
 - Para activar la red de testeo seguiremos esta ruta:
+
 ![metagiftest](./testingnet.gif)
 
 Icono de perfil > Configuración > Avanzado > Show test networks
