@@ -78,3 +78,7 @@ La cuenta viene por defecto desconectada, así que si pulsamos en el botón de e
 ![conectar](./conectar.gif)
 
 Una vez conectada ya estará activada como la cuenta principal, si queremos volver a cambiar podemos pulsar en el icono de perfil y seleccionamos otra. Al crear una cuenta nueva, cabe destacar que se puede aprovechar para solicitar ethereum nuevamente en el faucet antes mencionado, ya que la limitación funciona en base al address de la cuenta a la que se envía.
+
+## Móviles
+
+Gilwing no puede ser utilizado desde cualquier navegador en el caso de que queramos utilizarlo desde móviles. Siempre que queramos acceder a la app desde un dispositivo móvil tendremos que hacerlo desde la aplicación de Metamask, la cual nos aporta un navegador con una wallet incorporada. La configuración es la misma que desde un navegador, usamos la red de testeo Rinkeby y el usuario puede ser nuevo o el mismo que en el navegador de sobremesa en el caso de que hayamos guardado la mnemonic phrase durante la creacion de esta.

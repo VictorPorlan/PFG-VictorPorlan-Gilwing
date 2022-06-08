@@ -1,5 +1,5 @@
 import { Button, Card, TextField } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { ICampaign, IMember } from "../../interfaces/Campaign";
 import LoadingDialog from "../molecules/loadingDialog";
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down("md")]: {
             gridRow: 3,
         },
-    }
+    },
 }));
 
 interface IProps {
@@ -72,7 +72,7 @@ interface IProps {
     message: string;
     finished: boolean;
     open: boolean;
-    balance:string;
+    balance: string;
     error: boolean;
     handleNombre: (x: string) => void;
     handleComentario: (x: string) => void;
@@ -112,6 +112,14 @@ const DetailsCampaignTemplate: FC<IProps> = ({
     handleCantidadTransact,
 }) => {
     const classes = useStyles();
+    useEffect(() => {
+        console.log("not0", parseFloat(cantidadTransact) <= 0);
+        console.log(parseFloat(balance), parseFloat(cantidadTransact));
+        console.log(
+            "higher than",
+            parseFloat(balance) < parseFloat(cantidadTransact)
+        );
+    }, [cantidadTransact]);
     return (
         <>
             {campaignData === undefined ? (
@@ -122,11 +130,10 @@ const DetailsCampaignTemplate: FC<IProps> = ({
                 />
             ) : (
                 <div className={classes.content}>
-                     <ErrorDialog
+                    <ErrorDialog
                         error={error}
                         title="Ha ocurrido un error en la transacción"
-                        message={
-                        `Es posible que el fallo haya sido ocasionado por una falta de gas
+                        message={`Es posible que el fallo haya sido ocasionado por una falta de gas
                         o por un fallo de conexión`}
                         onPress={() => window.location.reload()}
                     />
@@ -305,6 +312,13 @@ const DetailsCampaignTemplate: FC<IProps> = ({
                                             width: "100%",
                                         }}
                                         onClick={handleMakeTransaction}
+                                        disabled={
+                                            description === "" ||
+                                            recipient === "" ||
+                                            parseFloat(cantidadTransact) <= 0 ||
+                                            parseFloat(balance) <
+                                                parseFloat(cantidadTransact)
+                                        }
                                     >
                                         Iniciar transacción
                                     </Button>

@@ -42,7 +42,7 @@ const App = () => {
                 es necesario el uso de una wallet para gestionar 
                 las transacciones que sea necesario realizar. 
                 En Gilwing recomendados encarecidamente el uso 
-                de Metamask. <a href=https://metamask.io/ target="_blank" style="color: white; text-decoration: underline;"> Aquí encontrará cómo instalar y usar Metamask</a>`)
+                de Metamask. <a href=https://github.com/VictorPorlan/PFG-VictorPorlan-Gilwing/blob/main/doc/howToUse/howToUse.md target="_blank" style="color: white; text-decoration: underline;"> Aquí encontrará cómo instalar y usar Metamask</a>`)
                 setError(true)
             }
         }
