@@ -150,9 +150,7 @@ Esta fue la planificación inicial del tiempo que se estimó antes de empezar el
 
 ---
 
-![Clockify](./doc/timeTrack/clockifyPage1.png)
-
-![Clockify](./doc/timeTrack/clockifyPage2.png)
+![Clockify](./doc/timeTrack/clockify.png)
 
 Como he mencionado antes, la distribución del tiempo ha sido bastante acertada cuando la comparamos con el diagrama de Gantt, yendo gran parte del tiempo al diseño del frontend y a la funcionalidad del mismo. Una parte que se me olvidó incluir en el diagrama de Gantt fue el tiempo de despliegue, el cual fue bastante simple y rápido, asi que incluso se podría añadir en la parte de frontend.
 
