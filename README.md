@@ -285,7 +285,7 @@ En un pricipio se planteó el uso de una librería de generación aleatoria de f
 
 Con un servidor web cloud en IONOS se ha desplegado la aplicación utilizando Apache. Se generó una versión de producción en el servidor de la aplicación de react y se puso como directorio base en el archivo de configuración de apache.
 
-Luego, usando Certbot se generó un certificado SSL para poder utilizar el protocolo **https**, principalmente para poder ser usado desde el navegador de Metamask en moviles, el cual solo hacepta este protocolo por motivos de seguridad.
+Luego, usando Certbot se generó un certificado SSL para poder utilizar el protocolo **https**, principalmente para poder ser usado desde el navegador de Metamask en moviles, el cual solo acepta este protocolo por motivos de seguridad.
 
 ### Resultados y conclusiones
 
